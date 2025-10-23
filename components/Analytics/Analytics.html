@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <title>Document</title>
+</head>
+
+<body class="m-0 p-0">
+  <div class="flex">
+    <!-- Sidebar -->
+    <div class="w-[285px] bg-[#e8e9eb] md:h-screen hidden md:block">
+
+    </div>
+
+    <!-- Full height gray background -->
+    <div class="bg-[#f5f7f5] md:h-screen w-[100%] py-[20px] px-[25px]">
+      <!-- Analytics heading -->
+      <h1 class="text-[23px] font-bold pb-[25px] pt-[5px] ">Analytics</h1>
+      <!-- bundle deals button -->
+      <button
+        class="bg-[#ffffff] h-[30px] w-[140px] rounded-[8px] flex gap-[2px] items-center border-[1px] border-[#d7d9d7] mb-[20px] ps-[8px]">
+        <span class="Polaris-Icon flex">
+          <span class="Polaris-Icon flex">
+            <svg viewBox="0 0 20 20" class="w-[20px] h-[20px]" focusable="false" aria-hidden="true" fill="#6e6e6e">
+              <path d="M3 6a.75.75 0 0 1 .75-.75h12.5a.75.75 0 0 1 0 1.5h-12.5a.75.75 0 0 1-.75-.75Z"></path>
+              <path d="M6.75 14a.75.75 0 0 1 .75-.75h5a.75.75 0 0 1 0 1.5h-5a.75.75 0 0 1-.75-.75Z"></path>
+              <path d="M5.5 9.25a.75.75 0 0 0 0 1.5h9a.75.75 0 0 0 0-1.5h-9Z"></path>
+            </svg>
+          </span>
+
+        </span>
+
+        </svg><span class="text-[13px] text-[#303030] font-semibold">All bundle deals</span></span>
+      </button>
+      <!-- Blocks -->
+      <div class="flex flex-col  gap-[8px]">
+        <div class="flex flex-col md:flex-row gap-[10px]">
+          <!-- Visitors block -->
+          <div class="bg-white h-[100px] md:w-[400px] border border-[#d7d9d7] rounded-[12px] py-[12px] px-[15px]">
+            <div class="flex flex-col gap-[10px]">
+              <div class="flex justify-between">
+                <p class="text-[#303030] font-semibold">Visitors</p>
+                <svg viewBox="0 0 20 20" class="h-[20px] w-[20px]" focusable="false" aria-hidden="true" fill="#8a8a8a">
+                  <path d="M10 14a.75.75 0 0 1-.75-.75v-3.5a.75.75 0 0 1 1.5 0v3.5a.75.75 0 0 1-.75.75Z"></path>
+                  <path d="M9 7a1 1 0 1 1 2 0 1 1 0 0 1-2 0Z"></path>
+                  <path fill-rule="evenodd"
+                    d="M17 10a7 7 0 1 1-14 0 7 7 0 0 1 14 0Zm-1.5 0a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0Z"></path>
+                </svg>
+              </div>
+              <div>
+                <p class="text-[#303030] font-bold text-[25px]">0</p>
+              </div>
+            </div>
+          </div>
+          <!-- Bundle orders block -->
+          <div class="bg-white h-[100px] md:w-[400px] border border-[#d7d9d7] rounded-[12px] py-[12px] px-[15px]">
+            <div class="flex flex-col gap-[10px]">
+              <div class="flex justify-between">
+                <p class="text-[#303030] font-semibold">Bundle orders</p>
+                <svg viewBox="0 0 20 20" class="h-[20px] w-[20px]" focusable="false" aria-hidden="true" fill="#8a8a8a">
+                  <path d="M10 14a.75.75 0 0 1-.75-.75v-3.5a.75.75 0 0 1 1.5 0v3.5a.75.75 0 0 1-.75.75Z"></path>
+                  <path d="M9 7a1 1 0 1 1 2 0 1 1 0 0 1-2 0Z"></path>
+                  <path fill-rule="evenodd"
+                    d="M17 10a7 7 0 1 1-14 0 7 7 0 0 1 14 0Zm-1.5 0a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0Z"></path>
+                </svg>
+              </div>
+              <div>
+                <p class="text-[#303030] font-bold text-[25px]">0</p>
+              </div>
+            </div>
+          </div>
+          <!-- Conversion to bundle block -->
+          <div class="bg-white h-[100px] md:w-[400px] border border-[#d7d9d7] rounded-[12px] py-[12px] px-[15px]">
+            <div class="flex flex-col gap-[12px]">
+              <div class="flex justify-between">
+                <p class="text-[#303030] font-semibold">Conversion to bundle</p>
+                <svg viewBox="0 0 20 20" class="h-[20px] w-[20px]" focusable="false" aria-hidden="true" fill="#8a8a8a">
+                  <path d="M10 14a.75.75 0 0 1-.75-.75v-3.5a.75.75 0 0 1 1.5 0v3.5a.75.75 0 0 1-.75.75Z"></path>
+                  <path d="M9 7a1 1 0 1 1 2 0 1 1 0 0 1-2 0Z"></path>
+                  <path fill-rule="evenodd"
+                    d="M17 10a7 7 0 1 1-14 0 7 7 0 0 1 14 0Zm-1.5 0a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0Z"></path>
+                </svg>
+              </div>
+              <div>
+                <p class="text-[#303030] font-bold text-[25px]">0%</p>
+              </div>
+            </div>
+          </div>
+          <!-- Added revenue block -->
+          <div class="bg-white h-[100px] md:w-[400px] border border-[#d7d9d7] rounded-[12px] py-[12px] px-[15px]">
+            <div class="flex flex-col gap-[10px]">
+              <div class="flex justify-between">
+                <p class="text-[#303030] font-semibold">Added revenue</p>
+                <svg viewBox="0 0 20 20" class="h-[20px] w-[20px]" focusable="false" aria-hidden="true" fill="#8a8a8a">
+                  <path d="M10 14a.75.75 0 0 1-.75-.75v-3.5a.75.75 0 0 1 1.5 0v3.5a.75.75 0 0 1-.75.75Z"></path>
+                  <path d="M9 7a1 1 0 1 1 2 0 1 1 0 0 1-2 0Z"></path>
+                  <path fill-rule="evenodd"
+                    d="M17 10a7 7 0 1 1-14 0 7 7 0 0 1 14 0Zm-1.5 0a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0Z"></path>
+                </svg>
+              </div>
+              <div>
+                <p class="text-[#303030] font-bold text-[25px]">PKR 0</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div>
+
+        </div>
+        <!-- Bundle conversion block -->
+        <div class="flex flex-col md:flex-row gap-[12px]">
+          <div class="bg-white md:h-[400px] md:w-[550px]  border border-[#d7d9d7] rounded-[12px] py-[12px] px-[15px]">
+            <p class="text-[#303030] font-semibold">Bundle conversion</p>
+            <p class="text-[#8a8a8a] text-[14px] font-normal">See how many customers are converting to bundles.</p>
+            <div class="flex justify-center pt-2">
+              <div class="relative">
+                <!-- Donut Chart SVG -->
+                <svg viewBox="-40 -40 320 320" height="300" width="300">
+                  <g class="_DonutChart_1ga5u_183">
+                    <g aria-hidden="true">
+                      <clipPath id="DonutChart-10" transform="translate(120 120)">
+                        <path class="_Arc_12guq_144"
+                          d="M0,-150A150,150,0,1,1,0,150A150,150,0,1,1,0,-150M0,-120A120,120,0,1,0,0,120A120,120,0,1,0,0,-120Z">
+                        </path>
+                      </clipPath>
+                      <g class="_Arc_12guq_144" data-color-vision-event-watch="true"
+                        data-color-vision-event-type="singleItem" data-color-vision-event-index="0"
+                        clip-path="url(#DonutChart-10)" data-type="Arc" data-index="0" aria-hidden="false"
+                        data-start-angle="0" data-end-angle="6.283185307179586"
+                        style="opacity: 1; transition: opacity 100ms;">
+                        <foreignObject x="-180" y="-180" width="600" height="600">
+                          <div
+                            style="width: 600px; height: 600px; background-image: conic-gradient(rgb(238, 238, 239) 0%, rgb(238, 238, 239) 1%);">
+                          </div>
+                        </foreignObject>
+                      </g>
+                    </g>
+                  </g>
+                </svg>
+
+                <!-- Centered Number -->
+                <p
+                  class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[25px] font-bold text-[#707071]">
+                  0
+                </p>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Revenue Graph block -->
+          <div class="bg-white md:h-[400px] md:w-[1067px] border border-[#d7d9d7] rounded-[12px] py-[12px] px-[15px]">
+            <div class="flex flex-col">
+              <div class="flex flex-col gap-[5px]">
+                <p class="text-[#303030] font-semibold">Daily added revenue</p>
+                <p class="text-[#8a8a8a] text-[14px] font-normal">See how much additional revenue you’re making with
+                  this app every day.</p>
+              </div>
+              <div class="pt-[10px]">
+                <canvas id="myChart" style="width:100%; height: 255px;"></canvas>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+</body>
+
+<script>
+  const xValues = [100, 200, 300, 400, 500, 600, 700, 800, 900, 1000];
+
+  new Chart("myChart", {
+    type: "line",
+    data: {
+      labels: xValues,
+      datasets: [{
+        data: [860, 1140, 1060, 1060, 1070, 1110, 1330, 2210, 7830, 2478],
+        borderColor: "red",
+        fill: false
+      }, {
+        data: [1600, 1700, 1700, 1900, 2000, 2700, 4000, 5000, 6000, 7000],
+        borderColor: "green",
+        fill: false
+      }, {
+        data: [300, 700, 2000, 5000, 6000, 4000, 2000, 1000, 200, 100],
+        borderColor: "blue",
+        fill: false
+      }]
+    },
+    options: {
+      legend: { display: false }
+    }
+  });
+</script>
+
+</html>

@@ -1,0 +1,33 @@
+{
+    "id": 8635350057098,
+    "productMetafields": [
+        {
+            "namespace": "custom",
+            "key": "product_discount",
+            "value": "Buy 2 get 1 free",
+            "type": "single_line_text_field"
+        },
+        {
+            "namespace": "custom",
+            "key": "material",
+            "value": "Organic Cotton",
+            "type": "single_line_text_field"
+        },
+        {
+            "namespace": "custom",
+            "key": "care_instructions",
+            "value": "Machine wash cold, tumble dry low",
+            "type": "single_line_text_field"
+        }
+    ],
+    "productDiscountInfo": [
+        {
+            "Name": "Bundle #1",
+            "DiscountName": "BOGO_deal",
+            "Title": "Buy More, Save More",
+            "Visibilty": "All_Products",
+            "StartDate": "2025-08-11"
+        }
+    ],
+    "customMessage": "This content is from your MOCK public app proxy!"
+}
