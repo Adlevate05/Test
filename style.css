@@ -1,0 +1,15 @@
+/* app/styles/app.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.sidebar .Polaris-Icon{
+    margin: unset;
+}
+
+.sidebar .Polaris-Frame{
+    /* width: auto; */
+}
+.Polaris-TextField__ClearButton{
+    display: none !important;
+}
