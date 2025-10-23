@@ -1,0 +1,26 @@
+query CartInput {
+  cart {
+    lines {
+      id
+      quantity
+      merchandise {
+        __typename
+        ... on ProductVariant {
+          id
+          product {
+            id
+            inCollections {
+              collectionId
+            }
+          }
+        }
+      }
+    }
+  }
+  discount {
+    discountClasses
+    metafield(namespace: "$app:volume-discount", key: "function-configuration") {
+      value
+    }
+  }
+}

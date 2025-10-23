@@ -1,0 +1,45 @@
+# Learn more about configuring your app at https://shopify.dev/docs/apps/tools/cli/configuration
+
+client_id = "ca91e5b484da86846f79af064071d334"
+name = "Adlevate - Product Bundles"
+application_url = "https://adlevatebundle.com/"
+embedded = true
+handle = "adlevate-product-bundles"
+
+[webhooks]
+api_version = "2025-07"
+
+  [[webhooks.subscriptions]]
+  topics = [ "orders/create" ]
+  uri = "/webhooks/app/orders/create"
+
+  [[webhooks.subscriptions]]
+  topics = [ "discounts/delete" ]
+  uri = "/webhooks/app/discounts/delete"
+
+  [[webhooks.subscriptions]]
+  topics = [ "app/uninstalled" ]
+  uri = "/webhooks/app/uninstalled"
+
+ [[webhooks.subscriptions]]
+ compliance_topics = ["customers/data_request", "customers/redact", "shop/redact"]
+ uri = "/webhooks/app/compliance"
+
+[access_scopes]
+# Learn more at https://shopify.dev/docs/apps/tools/cli/configuration#access_scopes
+scopes = "read_orders,read_products,write_discounts,write_products,read_themes"
+
+[auth]
+redirect_urls = [
+  "https://adlevatebundle.com/auth/callback",
+  "https://adlevatebundle.com/auth/shopify/callback",
+  "https://adlevatebundle.com/api/auth/callback"
+]
+
+[app_proxy]
+url = "https://adlevatebundle.com/apps/bundle"
+subpath = "bundle"
+prefix = "apps"
+
+[pos]
+embedded = false

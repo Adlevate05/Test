@@ -1,0 +1,6 @@
+name = "bundle-booster"
+uid = "eb654a55-b301-5e14-bd10-5d2fb272a7c0f70a9b98"
+type = "theme"
+
+[settings]
+enabled_location = "head"

@@ -1,0 +1,14 @@
+{
+    "include": ["node-cron.d.ts", "app/CronJobs/**/*.ts"],
+    "compilerOptions": {
+      "lib": ["ES2022"],
+      "strict": true,
+      "skipLibCheck": true,
+      "outDir": "./build/CronJobs", // Target folder for compiled schedules
+      "module": "ESNext",
+      "moduleResolution": "Node",
+      "target": "ES2022",
+      "esModuleInterop": true
+    }
+  }
+  

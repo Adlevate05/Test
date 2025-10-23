@@ -1,0 +1,61 @@
+{{ 'dynamic_block_style.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'dynamic_block_style.js' | asset_url }}" defer></script>
+
+{% comment %}Simple container block - JavaScript will handle the content{% endcomment %}
+{% unless product %}
+  <p>Error: This block requires a product page</p>
+{% else %}
+  <div
+    class="free-bulk-add-to-cart-container"
+    id="free-bulk-add-to-cart-container"
+    data-product-id="{{ product.id }}"
+    style="--divider-color: {{ block.settings.block_divider_color | default: '#cccccc' }}; --block-title-color: {{ block.settings.block_title_color | default: '#121212' }};"
+  >
+    <div class="loading-placeholder"></div>
+  </div>
+{% endunless %}
+
+{% schema %}
+{
+  "name": "Dynamic Deal Block",
+  "target": "section",
+  "settings": [
+    {
+      "type": "color",
+      "id": "block_title_color",
+      "label": "Block Title Color",
+      "default": "#121212"
+    },
+    {
+      "type": "color",
+      "id": "block_divider_color",
+      "label": "Divider Line Color",
+      "default": "#cccccc"
+    },
+    {
+      "type": "color",
+      "id": "btn_1_bg_color",
+      "label": "Button 1 Background Color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "btn_1_text_color",
+      "label": "Button 1 Text Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "btn_2_bg_color",
+      "label": "Button 2 Background Color",
+      "default": "#222222"
+    },
+    {
+      "type": "color",
+      "id": "btn_2_text_color",
+      "label": "Button 2 Text Color",
+      "default": "#ffffff"
+    }
+  ]
+}
+{% endschema %}

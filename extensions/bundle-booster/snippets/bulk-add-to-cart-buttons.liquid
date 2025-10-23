@@ -1,0 +1,215 @@
+<div id="bulk-buttons-section">
+  {% assign variant = product.selected_or_first_available_variant %}
+  {% assign block_title_text = block.settings['block-title-text'] %}
+
+  <!-- Get current cart quantity for this variant -->
+  {% assign current_cart_qty = 0 %}
+  {% for item in cart.items %}
+    {% if item.variant_id == variant.id %}
+      {% assign current_cart_qty = item.quantity %}
+      {% break %}
+    {% endif %}
+  {% endfor %}
+
+  <div class="bulk-add-to-cart-container">
+    <div class="content-container" style="--divider-color: {{ block.settings.block_divider_color | default: '#ccc' }};">
+      {% if block_title_text %}
+        <p style="color: {{ block.settings.block_title_color | default: '#121212' }};">
+          {{ block_title_text }}
+        </p>
+      {% endif %}
+    </div>
+
+    {% if block.settings.btn_one_text and block.settings.btn_one_qty > 0 %}
+      <!-- Check Button One Eligibility -->
+      {% assign btn_one_eligible = false %}
+      {% assign btn_one_target_qty = block.settings.btn_one_qty %}
+
+      {% if current_cart_qty == 0 %}
+        <!-- Not in cart yet, show as eligible -->
+        {% assign btn_one_eligible = true %}
+      {% elsif current_cart_qty == btn_one_target_qty %}
+        <!-- Already has exact quantity, show as ineligible -->
+        {% assign btn_one_eligible = false %}
+      {% else %}
+        <!-- Has different quantity, show as eligible to change -->
+        {% assign btn_one_eligible = true %}
+      {% endif %}
+
+      <!-- Calculate Button One Discount -->
+      {% assign btn_one_discount_percent = block.settings.btn_one_discount_label | remove: '%' | plus: 0 %}
+      {% assign btn_one_total_original = product.price | times: block.settings.btn_one_qty %}
+      {% assign btn_one_discount_amount = btn_one_total_original
+        | times: btn_one_discount_percent
+        | divided_by: 100.0
+      %}
+      {% assign btn_one_final_price = btn_one_total_original | minus: btn_one_discount_amount %}
+
+      <form class="bulk-cart-form" action="{{ routes.cart_add_url }}" method="post" enctype="multipart/form-data">
+        <input type="hidden" name="id" value="{{ variant.id }}">
+        <input type="hidden" name="quantity" value="{{ block.settings.btn_one_qty }}">
+        <button
+          type="submit"
+          class="bulk_btn bulk-add-button {% if btn_one_eligible %}eligible{% else %}ineligible{% endif %}"
+          style="background-color: {{ block.settings.btn_one_bg_color }}; color: {{ block.settings.btn_one_text_color }}; border-color: {{ block.settings.btn_one_text_color }};"
+          data-original-text="{{ block.settings.btn_one_text }}"
+          data-quantity="{{ block.settings.btn_one_qty }}"
+          data-current-qty="{{ current_cart_qty }}"
+          data-original-bg="{{ block.settings.btn_one_bg_color }}"
+          data-original-color="{{ block.settings.btn_one_text_color }}"
+          data-eligible="{{ btn_one_eligible }}"
+          {% unless btn_one_eligible %}
+            disabled
+          {% endunless %}
+        >
+          <div class="button-content">
+            <div class="details">
+              <h2>{{ block.settings.btn_one_text }}</h2>
+              <p>
+                <s>{{ btn_one_total_original | money }}</s> {{ btn_one_final_price | money }}
+              </p>
+            </div>
+            <div class="discount-row">
+              <span class="discount-label">Save {{ block.settings.btn_one_discount_label }}</span>
+              <span class="discounted-price">{{ btn_one_discount_amount | money }}</span>
+            </div>
+            {% unless btn_one_eligible %}
+              <div class="eligibility-message">
+                {% if current_cart_qty == btn_one_target_qty %}
+                  Already in cart ({{ current_cart_qty }})
+                {% endif %}
+              </div>
+            {% endunless %}
+          </div>
+          <div class="loading-spinner" style="display: none;"></div>
+        </button>
+      </form>
+    {% endif %}
+
+    {% if block.settings.btn_two_text and block.settings.btn_two_qty > 0 %}
+      <!-- Check Button Two Eligibility -->
+      {% assign btn_two_eligible = false %}
+      {% assign btn_two_target_qty = block.settings.btn_two_qty %}
+
+      {% if current_cart_qty == 0 %}
+        {% assign btn_two_eligible = true %}
+      {% elsif current_cart_qty == btn_two_target_qty %}
+        {% assign btn_two_eligible = false %}
+      {% else %}
+        {% assign btn_two_eligible = true %}
+      {% endif %}
+
+      <!-- Calculate Button Two Discount -->
+      {% assign btn_two_discount_percent = block.settings.btn_two_discount_label | remove: '%' | plus: 0 %}
+      {% assign btn_two_total_original = product.price | times: block.settings.btn_two_qty %}
+      {% assign btn_two_discount_amount = btn_two_total_original
+        | times: btn_two_discount_percent
+        | divided_by: 100.0
+      %}
+      {% assign btn_two_final_price = btn_two_total_original | minus: btn_two_discount_amount %}
+
+      <form class="bulk-cart-form" action="{{ routes.cart_add_url }}" method="post" enctype="multipart/form-data">
+        <input type="hidden" name="id" value="{{ variant.id }}">
+        <input type="hidden" name="quantity" value="{{ block.settings.btn_two_qty }}">
+        <button
+          type="submit"
+          class="bulk_btn bulk-add-button {% if btn_two_eligible %}eligible{% else %}ineligible{% endif %}"
+          style="background-color: {{ block.settings.btn_two_bg_color }}; color: {{ block.settings.btn_two_text_color }}; border-color: {{ block.settings.btn_two_text_color }};"
+          data-original-text="{{ block.settings.btn_two_text }}"
+          data-quantity="{{ block.settings.btn_two_qty }}"
+          data-current-qty="{{ current_cart_qty }}"
+          data-original-bg="{{ block.settings.btn_two_bg_color }}"
+          data-original-color="{{ block.settings.btn_two_text_color }}"
+          data-eligible="{{ btn_two_eligible }}"
+          {% unless btn_two_eligible %}
+            disabled
+          {% endunless %}
+        >
+          <div class="button-content">
+            <div class="details">
+              <h2>{{ block.settings.btn_two_text }}</h2>
+              <p>
+                <s>{{ btn_two_total_original | money }}</s> {{ btn_two_final_price | money }}
+              </p>
+            </div>
+            <div class="discount-row">
+              <span class="discount-label">Save {{ block.settings.btn_two_discount_label }}</span>
+              <span class="discounted-price">{{ btn_two_discount_amount | money }}</span>
+            </div>
+            {% unless btn_two_eligible %}
+              <div class="eligibility-message">
+                {% if current_cart_qty == btn_two_target_qty %}
+                  Already in cart ({{ current_cart_qty }})
+                {% endif %}
+              </div>
+            {% endunless %}
+          </div>
+          <div class="loading-spinner" style="display: none;"></div>
+        </button>
+      </form>
+    {% endif %}
+
+    {% if block.settings.btn_three_text and block.settings.btn_three_qty > 0 %}
+      <!-- Check Button Three Eligibility -->
+      {% assign btn_three_eligible = false %}
+      {% assign btn_three_target_qty = block.settings.btn_three_qty %}
+
+      {% if current_cart_qty == 0 %}
+        {% assign btn_three_eligible = true %}
+      {% elsif current_cart_qty == btn_three_target_qty %}
+        {% assign btn_three_eligible = false %}
+      {% else %}
+        {% assign btn_three_eligible = true %}
+      {% endif %}
+
+      <!-- Calculate Button Three Discount -->
+      {% assign btn_three_discount_percent = block.settings.btn_three_discount_label | remove: '%' | plus: 0 %}
+      {% assign btn_three_total_original = product.price | times: block.settings.btn_three_qty %}
+      {% assign btn_three_discount_amount = btn_three_total_original
+        | times: btn_three_discount_percent
+        | divided_by: 100.0
+      %}
+      {% assign btn_three_final_price = btn_three_total_original | minus: btn_three_discount_amount %}
+
+      <form class="bulk-cart-form" action="{{ routes.cart_add_url }}" method="post" enctype="multipart/form-data">
+        <input type="hidden" name="id" value="{{ variant.id }}">
+        <input type="hidden" name="quantity" value="{{ block.settings.btn_three_qty }}">
+        <button
+          type="submit"
+          class="bulk_btn bulk-add-button {% if btn_three_eligible %}eligible{% else %}ineligible{% endif %}"
+          style="background-color: {{ block.settings.btn_three_bg_color }}; color: {{ block.settings.btn_three_text_color }}; border-color: {{ block.settings.btn_three_text_color }};"
+          data-original-text="{{ block.settings.btn_three_text }}"
+          data-quantity="{{ block.settings.btn_three_qty }}"
+          data-current-qty="{{ current_cart_qty }}"
+          data-original-bg="{{ block.settings.btn_three_bg_color }}"
+          data-original-color="{{ block.settings.btn_three_text_color }}"
+          data-eligible="{{ btn_three_eligible }}"
+          {% unless btn_three_eligible %}
+            disabled
+          {% endunless %}
+        >
+          <div class="button-content">
+            <div class="details">
+              <h2>{{ block.settings.btn_three_text }}</h2>
+              <p>
+                <s>{{ btn_three_total_original | money }}</s> {{ btn_three_final_price | money }}
+              </p>
+            </div>
+            <div class="discount-row">
+              <span class="discount-label">Save {{ block.settings.btn_three_discount_label }}</span>
+              <span class="discounted-price">{{ btn_three_discount_amount | money }}</span>
+            </div>
+            {% unless btn_three_eligible %}
+              <div class="eligibility-message">
+                {% if current_cart_qty == btn_three_target_qty %}
+                  Already in cart ({{ current_cart_qty }})
+                {% endif %}
+              </div>
+            {% endunless %}
+          </div>
+          <div class="loading-spinner" style="display: none;"></div>
+        </button>
+      </form>
+    {% endif %}
+  </div>
+</div>

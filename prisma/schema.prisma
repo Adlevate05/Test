@@ -1,0 +1,172 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider     = "postgresql"
+  url          = env("DATABASE_URL")
+  relationMode = "prisma"
+}
+
+model Session {
+  id            String    @id
+  shop          String
+  state         String
+  isOnline      Boolean   @default(false)
+  scope         String?
+  expires       DateTime?
+  accessToken   String
+  userId        BigInt?
+  firstName     String?
+  lastName      String?
+  email         String?
+  accountOwner  Boolean   @default(false)
+  locale        String?
+  collaborator  Boolean?  @default(false)
+  emailVerified Boolean?  @default(false)
+  mantleApiToken String?
+  appEmbedValue  Int?     @default(0)
+}
+
+model booster_discounts {
+  id                          Int                         @id @default(autoincrement())
+  shop_name                   String
+  shopify_discount_id         String?
+  shopify_function_id         String?
+  discount_type               String
+  name_app                    String
+  name_store                  String
+  block_title                 String
+  visibility_primary          String?
+  visibility_bundle           String?
+  start_date                  DateTime
+  start_time                  String
+  end_date                    DateTime?
+  end_time                    String?
+  configuration_block_style   Json
+  configuration_block_options Json
+  created_at                  DateTime                    @default(now())
+  status                      String                      @default("active")
+  deal_status                 String                      @default("active")
+  updated_at                  DateTime                    @default(now()) @updatedAt
+  primary_specific_products   primary_specific_products[]
+  primary_except_products     primary_except_products[]
+  bundle_specific_products    bundle_specific_products[]
+  bundle_except_products      bundle_except_products[]
+
+  @@index([shop_name])
+  @@index([start_date])
+  @@index([status])
+}
+
+model primary_specific_products {
+  shop_name            String
+  booster_discounts_id Int
+  shopify_product_id   String
+  discount             booster_discounts @relation(fields: [booster_discounts_id], references: [id])
+
+  @@id([shop_name, booster_discounts_id, shopify_product_id])
+  @@index([booster_discounts_id])
+}
+
+model primary_except_products {
+  shop_name            String
+  booster_discounts_id Int
+  shopify_product_id   String
+  discount             booster_discounts @relation(fields: [booster_discounts_id], references: [id])
+
+  @@id([shop_name, booster_discounts_id, shopify_product_id])
+  @@index([booster_discounts_id])
+}
+
+model bundle_specific_products {
+  shop_name            String
+  booster_discounts_id Int
+  shopify_product_id   String
+  discount             booster_discounts @relation(fields: [booster_discounts_id], references: [id])
+
+  @@id([shop_name, booster_discounts_id, shopify_product_id])
+  @@index([booster_discounts_id])
+}
+
+model bundle_except_products {
+  shop_name            String
+  booster_discounts_id Int
+  shopify_product_id   String
+  discount             booster_discounts @relation(fields: [booster_discounts_id], references: [id])
+
+  @@id([shop_name, booster_discounts_id, shopify_product_id])
+  @@index([booster_discounts_id])
+}
+
+model block_styles {
+  id           Int      @id @default(autoincrement())
+  handle       String   @unique
+  html_content String
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+model analytics_visitors {
+  id                  Int               @id @default(autoincrement())
+  booster_discounts_id Int
+  shopify_product_id  String?           // nullable
+  shop_name           String            @default("")
+  ip_address          String?           // nullable
+  platform            String?           // nullable
+  operating_system    String?           // nullable
+  browser             String?           // nullable
+  created_at          DateTime          @default(now())
+  updated_at          DateTime          @default(now()) @updatedAt
+  date                 DateTime          @default(now()) @db.Date 
+
+  @@index([booster_discounts_id])
+  @@index([shopify_product_id])
+}
+
+model analytics_visitors_unique_bundle {
+  id                  Int               @id @default(autoincrement())
+  booster_discounts_id Int
+  shopify_product_id  String?           // nullable
+  shop_name           String            @default("")
+  ip_address          String?           // nullable
+  platform            String?           // nullable
+  operating_system    String?           // nullable
+  browser             String?           // nullable
+  date                 DateTime          @default(now()) @db.Date 
+
+  @@index([booster_discounts_id])
+  @@index([shopify_product_id])
+}
+
+model analytics_visitors_unique_app_general {
+  id                  Int               @id @default(autoincrement())
+  shop_name           String            @default("") 
+  visitors_count      Int              // nullable
+}
+
+model analytics_bundle_revenue {
+  id                    Int      @id @default(autoincrement())
+  shopify_order_id      String
+  shopify_order_number  String
+  shopify_product_id    String
+  shopify_variant_id    String
+  sku                   String? @default("")
+  shop_name             String
+  booster_discounts_id  String
+  base_total            Float
+  customer_pays         Float
+  discount_amount       Float
+  item_quantity         Int @default(0)
+  item_price            Float @default(0)
+  discount_allocation_amount  Float @default(0)  
+  currency              String
+  createdAt             DateTime @default(now())
+  updatedAt             DateTime @updatedAt
+  date                 DateTime          @default(now()) @db.Date 
+
+  @@index([shopify_order_id])
+  @@index([shopify_order_number])
+  @@index([shopify_product_id])
+  @@index([shopify_variant_id])
+}

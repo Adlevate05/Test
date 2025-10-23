@@ -1,0 +1,44 @@
+# Learn more about configuring your app at https://shopify.dev/docs/apps/tools/cli/configuration
+
+client_id = "f816dc8cce5c8e3e097a6a9db3cefb01"
+name = "Bundle Booster v1"
+application_url = "https://babies-tremendous-attitude-actor.trycloudflare.com"
+embedded = true
+handle = "bundle-booster-3"
+
+[webhooks]
+api_version = "2025-07"
+
+  [[webhooks.subscriptions]]
+  topics = [ "app/uninstalled" ]
+  uri = "/webhooks/app/uninstalled"
+
+  [[webhooks.subscriptions]]
+  topics = [ "orders/create" ]
+  uri = "/webhooks/app/orders/create"
+
+  [[webhooks.subscriptions]]
+  topics = [ "discounts/delete" ]
+  uri = "/webhooks/app/discounts/delete"
+
+[access_scopes]
+# Learn more at https://shopify.dev/docs/apps/tools/cli/configuration#access_scopes
+scopes = "read_orders,read_products,write_discounts,write_orders,write_products,read_themes"
+
+[auth]
+redirect_urls = [
+  "https://babies-tremendous-attitude-actor.trycloudflare.com/auth/callback",
+  "https://babies-tremendous-attitude-actor.trycloudflare.com/auth/shopify/callback",
+  "https://babies-tremendous-attitude-actor.trycloudflare.com/api/auth/callback"
+]
+
+[app_proxy]
+url = "https://babies-tremendous-attitude-actor.trycloudflare.com/apps/bundle"
+subpath = "bundle"
+prefix = "apps"
+
+[pos]
+embedded = false
+
+[build]
+automatically_update_urls_on_dev = true

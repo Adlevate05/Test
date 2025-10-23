@@ -1,0 +1,28 @@
+api_version = "2025-04"
+
+[[extensions]]
+name = "t:name"
+handle = "adlevate-product-bundle"
+uid = "981ce647-9188-111b-d246-3859a5889cf050d63b09"
+type = "function"
+
+description = "t:description"
+
+  [[extensions.targeting]]
+  target = "cart.lines.discounts.generate.run"
+  input_query = "src/cart_lines_discounts_generate_run.graphql"
+  export = "cart-lines-discounts-generate-run"
+
+  [[extensions.targeting]]
+  target = "cart.delivery-options.discounts.generate.run"
+  input_query = "src/cart_delivery_options_discounts_generate_run.graphql"
+  export = "cart-delivery-options-discounts-generate-run"
+
+  [extensions.build]
+  command = ""
+  path = "dist/function.wasm"
+
+[extensions.ui.paths]
+create = "/app/deal-discount-setup"
+details = "/app/discounts/edit/:id"
+
